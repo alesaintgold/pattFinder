@@ -3,7 +3,7 @@ import tkinter as tk
 from itertools import permutations
 from itertools import combinations
 
-class PattFinder(object):
+class PatternAvoid(object):
 	def __init__(self,n, pattern ):
 		if n <= 1:
 			print("ERROR: expecting a whole number grater than 1 but got: " + str(n))
@@ -61,7 +61,7 @@ if __name__ == '__main__':
 		str_pattern = sys.argv[2]
 		pattern = [int(char) for char in str_pattern]
 
-		result_list = PattFinder(n,pattern).getList()
+		result_list = PatternAvoid(n,pattern).getList()
 
 		result_str = "\nThe following "+str(len(result_list))+" are all the " + str(n)+"-permutations not containing the pattern " 
 		result_str = result_str + str_pattern+":\n\n"+printlist(result_list)
@@ -74,4 +74,4 @@ if __name__ == '__main__':
 	
 	else:
 		# for future implementation of GUI interface
-		print("not implemented yet")
+		print("GUI not implemented yet, use command line")
