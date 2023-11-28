@@ -40,7 +40,7 @@ class PatternAvoid(object):
 		return False
 
 	def getList(self):
-		return notcontaining
+		return self.notcontaining
 
 def printlist(list):
 	result = ""
