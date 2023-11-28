@@ -4,11 +4,6 @@ from itertools import permutations
 from itertools import combinations
 
 class PattFinder(object):
-	# args: 
-	# 		n:			int, 			
-	#					size of the permutations we want to check
-	#		pattern:	list of int,
-	#					represent the pattern we're trying to avoid
 	def __init__(self,n, pattern ):
 		if n <= 1:
 			print("ERROR: expecting a whole number grater than 1 but got: " + str(n))
@@ -44,6 +39,9 @@ class PattFinder(object):
 
 		return False
 
+	def getList(self):
+		return notcontaining
+
 def printlist(list):
 	result = ""
 	for item in list:
@@ -54,7 +52,7 @@ if __name__ == '__main__':
 
 	narg = len(sys.argv)
 	
-	if narg != 3:
+	if narg not in (1,3):
 		print("ERROR: unexpected number of arguments")
 		exit()
 
@@ -63,10 +61,10 @@ if __name__ == '__main__':
 		str_pattern = sys.argv[2]
 		pattern = [int(char) for char in str_pattern]
 
-		finder = PattFinder(n,pattern)
+		result_list = PattFinder(n,pattern).getList()
 
-		result_str = "\nThe following "+str(len(finder.notcontaining))+" are all the " + str(n)+"-permutations not containing the pattern " 
-		result_str = result_str + str_pattern+":\n\n"+printlist(finder.notcontaining)
+		result_str = "\nThe following "+str(len(result_list))+" are all the " + str(n)+"-permutations not containing the pattern " 
+		result_str = result_str + str_pattern+":\n\n"+printlist(result_list)
 
 		print(result_str)
 
@@ -75,8 +73,5 @@ if __name__ == '__main__':
 		result_file.close()
 	
 	else:
-		pass
-
-
-
-
+		# for future implementation of GUI interface
+		print("not implemented yet")
