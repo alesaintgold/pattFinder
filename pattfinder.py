@@ -18,10 +18,13 @@ class PatternAvoid(object):
 		perms = list(permutations(range(1,n+1)))
 
 		self.notcontaining = []
+		self.containing = []
 
 		for p in perms:
 			if not self.contains(p,pattern):
 				self.notcontaining.append(p)
+			else:
+				self.containing.append(p)
 
 	def patternize(self,pi):
 		output = []
@@ -39,8 +42,11 @@ class PatternAvoid(object):
 
 		return False
 
-	def getList(self):
+	def getNotContaining(self):
 		return self.notcontaining
+
+	def getContaining(self):
+		return self.containing
 
 def printlist(list):
 	result = ""
@@ -61,15 +67,20 @@ if __name__ == '__main__':
 		str_pattern = sys.argv[2]
 		pattern = [int(char) for char in str_pattern]
 
-		result_list = PatternAvoid(n,pattern).getList()
+		pa = PatternAvoid(n,pattern)
 
-		result_str = "\nThe following "+str(len(result_list))+" are all the " + str(n)+"-permutations not containing the pattern " 
-		result_str = result_str + str_pattern+":\n\n"+printlist(result_list)
+		con = pa.getContaining()
+		ncon = pa.getNotContaining()
 
-		print(result_str)
+		ncon_str = "\nThe following "+str(len(ncon))+" " + str(n)+"-permutations do not contain the pattern " + str_pattern+":\n\n"+printlist(ncon)
+		con_str = "\nThe following "+str(len(con))+" " + str(n)+"-permutations do contain the pattern "  + str_pattern+":\n\n"+printlist(con)
 
+		print(ncon_str+"\n")
+		print(con_str)
+
+		# only the not conatining get saved in a file
 		result_file = open("./log/"+str(n)+"Av"+str_pattern+".txt","w")
-		result_file.write(result_str+"\n")
+		result_file.write(ncon_str+"\n")
 		result_file.close()
 	
 	else:
