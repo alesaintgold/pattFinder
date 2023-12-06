@@ -4,7 +4,7 @@ from itertools import permutations
 from itertools import combinations
 
 class PatternAvoid(object):
-	def __init__(self,n, pattern ):
+	def __init__(self,n, pattern):
 		if n <= 1:
 			print("ERROR: expecting a whole number grater than 1 but got: " + str(n))
 			exit()
@@ -26,20 +26,18 @@ class PatternAvoid(object):
 			else:
 				self.containing.append(p)
 
-	def patternize(self,pi):
-		output = []
-		sortedpi = sorted(pi)
-		for p in pi:
-			output.append(sortedpi.index(p)+1)
-		return output
+		def patternize(self,pi):
+			output = []
+			sortedpi = sorted(pi)
+			for p in pi:
+				output.append(sortedpi.index(p)+1)
+			return output
 
 	def contains(self, seq, pattern):
 		subseq = combinations(seq, len(pattern))
-
 		for s in subseq:
-			if self.patternize(s) == pattern:
+			if list(self.patternize(s)) == list(pattern):
 				return True
-
 		return False
 
 	def getNotContaining(self):
@@ -58,11 +56,11 @@ if __name__ == '__main__':
 
 	narg = len(sys.argv)
 	
-	if narg not in (1,3):
-		print("ERROR: unexpected number of arguments")
-		exit()
+	if narg ==1:
+		# for future implementation of GUI interface
+		print("GUI not implemented yet, use command line")
 
-	if(narg==3):
+	elif(narg==3):
 		n = int(sys.argv[1])	 
 		str_pattern = sys.argv[2]
 		pattern = [int(char) for char in str_pattern]
@@ -84,5 +82,5 @@ if __name__ == '__main__':
 		result_file.close()
 	
 	else:
-		# for future implementation of GUI interface
-		print("GUI not implemented yet, use command line")
+		print("ERROR: unexpected number of arguments")
+		exit()
