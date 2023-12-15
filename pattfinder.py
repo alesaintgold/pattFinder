@@ -3,14 +3,15 @@ from itertools import permutations,combinations
 
 class PatternAvoid():
 	def __init__(self,n, pattern):
-		self.__n = n
 		if n <= 1:
 			print("ERROR: expecting a whole number grater than 1 but got: " + str(n))
 			exit()
+		
+		self.__n = n
 
 		# checking the argument really is a classical pattern
 		for i in range(1, len(pattern)):
-			if i not in pattern:
+			if i not in list(int(x) for x in list(pattern)):
 				print("ERROR: expected a pattern but got: " + str(pattern))
 				print("\nA pattern of lenght n must have all the numbers from 1 to n, " + str(i) + " not present")
 				exit()
@@ -61,14 +62,14 @@ def printlist(list):
 if __name__ == '__main__':
 
 	narg = len(sys.argv)
-	
+
 	if narg ==1:
 		# for future implementation of GUI interface
 		import tkinter as tk
 		print("GUI not implemented yet, use command line")
 
 	elif(narg==3):
-		n = int(sys.argv[1])	 
+		n = int(sys.argv[1])
 		str_pattern = sys.argv[2]
 		pattern = [int(char) for char in str_pattern]
 
@@ -87,7 +88,7 @@ if __name__ == '__main__':
 		result_file = open("./log/"+str(n)+"Av"+str_pattern+".txt","w")
 		result_file.write(ncon_str+"\n")
 		result_file.close()
-	
+
 	else:
 		print("ERROR: unexpected number of arguments")
 		exit()
