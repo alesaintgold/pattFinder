@@ -5,5 +5,5 @@ rmlog:
 	rm log/*
 
 clean:
-	make rmlog
 	make rmcache
+	make rmlog
